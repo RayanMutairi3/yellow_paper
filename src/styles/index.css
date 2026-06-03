@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  background: #fbf7ed;
+}
+
+.dark {
+  color-scheme: dark;
+  background: #171512;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+main,
+section,
+header,
+button,
+input,
+textarea {
+  transition-property:
+    background-color,
+    border-color,
+    color,
+    box-shadow,
+    opacity,
+    transform;
+  transition-duration: 180ms;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  main,
+  section,
+  header,
+  button,
+  input,
+  textarea {
+    transition-duration: 0ms;
+  }
+}
+
+.note-card-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+@keyframes note-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes board-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes page-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.992);
+  }
+}
+
+.animate-note-in {
+  animation: note-in 220ms ease-out both;
+}
+
+.animate-toast-in {
+  animation: toast-in 180ms ease-out both;
+}
+
+.animate-board-enter {
+  animation: board-enter 220ms ease-out both;
+}
+
+.animate-page-enter {
+  animation: page-enter 220ms ease-out both;
+}
+
+.animate-page-exit {
+  animation: page-exit 180ms ease-in both;
+}
