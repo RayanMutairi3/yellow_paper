@@ -455,86 +455,87 @@ function App() {
   }
 
   return (
-    <main className={`${isBoardClosing ? "animate-page-exit" : "animate-page-enter"} min-h-screen overflow-x-hidden bg-[#f5eedc] text-stone-950 transition-colors dark:bg-[#13110f] dark:text-white`}>
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(160,120,28,0.14),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(90,120,170,0.1),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(247,223,132,0.14),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(135,171,219,0.12),transparent_30%)]" />
+    <>
+      <main className={`${isBoardClosing ? "animate-page-exit" : "animate-page-enter"} min-h-screen overflow-x-hidden bg-[#f5eedc] text-stone-950 transition-colors dark:bg-[#13110f] dark:text-white`}>
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(160,120,28,0.14),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(90,120,170,0.1),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(247,223,132,0.14),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(135,171,219,0.12),transparent_30%)]" />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-24 sm:px-6">
-        <header className="sticky top-0 z-20 -mx-4 mb-5 bg-[#f5eedc]/[0.88] px-4 pb-4 pt-5 backdrop-blur-xl dark:bg-[#13110f]/[0.86] sm:-mx-6 sm:px-6">
-          <div className="flex items-center justify-between gap-3">
-            <button
-              type="button"
-              onClick={closeBoard}
-              className="h-11 rounded-full bg-stone-950/10 px-4 text-sm font-bold text-stone-800 ring-1 ring-stone-950/10 transition active:scale-95 dark:bg-white/10 dark:text-white dark:ring-white/[0.15]"
-            >
-              رجوع
-            </button>
-            <ThemeToggle
-              isDarkMode={isDarkMode}
-              onToggleTheme={() => setIsDarkMode((currentValue) => !currentValue)}
-            />
-          </div>
-          <div className="mt-5">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-yellow-700 dark:text-yellow-200/80">
-              الورقة الصفراء
-            </p>
-            <h1 className="mt-2 text-3xl font-bold text-stone-950 dark:text-white">
-              {normalizeArabicCopy(activeBoard.title)}
-            </h1>
-            <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-300">
-              {getSectionCountLabel(boardSections.length)} ·{" "}
-              {getNoteCountLabel(boardNotes.length)} على الجدار
-            </p>
-          </div>
-        </header>
-
-        {boardSections.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {boardSections.map((section, sectionIndex) => (
-              <SectionPanel
-                key={section.id}
-                section={section}
-                isDarkMode={isDarkMode}
-                canMoveUp={sectionIndex > 0}
-                canMoveDown={sectionIndex < boardSections.length - 1}
-                notes={boardNotes.filter((note) => note.sectionId === section.id)}
-                onAddNote={openNoteCreator}
-                onRenameSection={openSectionEditor}
-                onDeleteSection={deleteSection}
-                onMoveSection={moveSection}
-                onEditNote={openNoteEditor}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="grid min-h-64 place-items-center rounded-[2rem] border border-dashed border-stone-300 bg-white/60 px-5 py-8 text-center dark:border-white/[0.15] dark:bg-white/[0.04]">
-            <div>
-              <p className="text-xl font-bold">هذه اللوحة فارغة</p>
-              <p className="mt-2 text-sm font-semibold text-stone-500 dark:text-stone-300">
-                أضف أول قسم وابدأ بتثبيت أوراقك
-              </p>
+        <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-24 sm:px-6">
+          <header className="sticky top-0 z-20 -mx-4 mb-5 bg-[#f5eedc]/[0.88] px-4 pb-4 pt-5 backdrop-blur-xl dark:bg-[#13110f]/[0.86] sm:-mx-6 sm:px-6">
+            <div className="flex items-center justify-between gap-3">
               <button
                 type="button"
-                onClick={() => {
-                  openSectionCreator();
-                }}
-                className="mt-5 h-12 rounded-full bg-[#f7df84] px-5 text-sm font-bold text-stone-950 shadow-sm transition active:scale-95"
+                onClick={closeBoard}
+                className="h-11 rounded-full bg-stone-950/10 px-4 text-sm font-bold text-stone-800 ring-1 ring-stone-950/10 transition active:scale-95 dark:bg-white/10 dark:text-white dark:ring-white/[0.15]"
               >
-                إضافة قسم
+                رجوع
               </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={openSectionCreator}
+                  className="h-11 rounded-full bg-[#f7df84] px-4 text-sm font-bold text-stone-950 shadow-sm transition active:scale-95 dark:bg-[#f0d054]"
+                >
+                  + إضافة قسم
+                </button>
+                <ThemeToggle
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={() => setIsDarkMode((currentValue) => !currentValue)}
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+            <div className="mt-5">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-yellow-700 dark:text-yellow-200/80">
+                الورقة الصفراء
+              </p>
+              <h1 className="mt-2 text-3xl font-bold text-stone-950 dark:text-white">
+                {normalizeArabicCopy(activeBoard.title)}
+              </h1>
+              <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-300">
+                {getSectionCountLabel(boardSections.length)} ·{" "}
+                {getNoteCountLabel(boardNotes.length)} على الجدار
+              </p>
+            </div>
+          </header>
 
-      <button
-        type="button"
-        onClick={openSectionCreator}
-        className="fixed bottom-[calc(env(safe-area-inset-bottom)+5.25rem)] left-1/2 z-30 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full bg-[#f7df84] text-3xl font-medium leading-none text-stone-950 shadow-2xl shadow-black/25 transition hover:-translate-y-0.5 active:scale-95"
-        aria-label="إضافة قسم"
-        title="إضافة قسم"
-      >
-        +
-      </button>
+          {boardSections.length > 0 ? (
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {boardSections.map((section, sectionIndex) => (
+                <SectionPanel
+                  key={section.id}
+                  section={section}
+                  isDarkMode={isDarkMode}
+                  canMoveUp={sectionIndex > 0}
+                  canMoveDown={sectionIndex < boardSections.length - 1}
+                  notes={boardNotes.filter((note) => note.sectionId === section.id)}
+                  onAddNote={openNoteCreator}
+                  onRenameSection={openSectionEditor}
+                  onDeleteSection={deleteSection}
+                  onMoveSection={moveSection}
+                  onEditNote={openNoteEditor}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid min-h-64 place-items-center rounded-[2rem] border border-dashed border-stone-300 bg-white/60 px-5 py-8 text-center dark:border-white/[0.15] dark:bg-white/[0.04]">
+              <div>
+                <p className="text-xl font-bold">هذه اللوحة فارغة</p>
+                <p className="mt-2 text-sm font-semibold text-stone-500 dark:text-stone-300">
+                  أضف أول قسم وابدأ بتثبيت أوراقك
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    openSectionCreator();
+                  }}
+                  className="mt-5 h-12 rounded-full bg-[#f7df84] px-5 text-sm font-bold text-stone-950 shadow-sm transition active:scale-95"
+                >
+                  إضافة قسم
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
 
       <BoardActionSheet
         isOpen={isSheetOpen}
@@ -566,7 +567,7 @@ function App() {
         onConfirm={confirmDeleteSection}
       />
       <Toast toast={toast} onClose={() => setToast(null)} />
-    </main>
+    </>
   );
 }
 

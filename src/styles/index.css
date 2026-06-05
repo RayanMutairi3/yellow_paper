@@ -153,3 +153,16 @@ textarea {
 .animate-page-exit {
   animation: page-exit 180ms ease-in both;
 }
+
+/* FAB button for adding sections on the board page.
+   Defined in CSS (not Tailwind arbitrary values) to guarantee
+   position:fixed works correctly on mobile Safari and Chrome,
+   even when parent elements have CSS animations or transforms. */
+.board-add-section-fab {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  /* max() ensures minimum 5.5rem gap even when safe-area is zero */
+  bottom: max(calc(env(safe-area-inset-bottom) + 5.5rem), 5.5rem);
+  z-index: 50;
+}
